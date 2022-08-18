@@ -7,41 +7,41 @@ const server = http.createServer((request, response) => {
     const path = urlObject.path;
     let fileSystemPath = '';
 
-    if(path === '/'){
+    if (path === '/') {
         fileSystemPath = 'static/index.html';
-    }else{
-        fileSystemPath = `stacic${path}`;
-    } 
+    } else {
+        fileSystemPath = `static${path}`;
+    }
 
     fs.stat(fileSystemPath, error => {
-        if(!error){
-            fs.readFile(fileSystemPath, (error,file)=>{
-                if(!error){
+        if (!error) {
+            fs.readFile(fileSystemPath, (error, file) => {
+                if (!error) {
                     const status = 200;
-                    const mimeType = {'Content-Type' : 'text/html'};
-                    reponse.writeHead(status, mimeType);
-                    reponse.write(file);
+                    const mimeType = { 'Content-Type': 'text/html' };
+                    response.writeHead(status, mimeType);
+                    response.write(file);
                     response.end();
-                }else{ 
-                //500  internal server error
-                const status = 500;
-                    const mimeType = {'Content-Type' : 'text/plain'};
-                    reponse.writeHead(status, mimeType);
-                    reponse.write('Error en el servidor');
+                } else {
+                    //500  internal server error
+                    const status = 500;
+                    const mimeType = { 'Content-Type': 'text/plain' };
+                    response.writeHead(status, mimeType);
+                    response.write('Error en el servidor');
                     response.end();
                 }
             });
-        }else{
+        } else {
             //404 not found
             const status = 404;
-                    const mimeType = {'Content-Type' : 'text/html'};
-                    reponse.writeHead(status, mimeType);
-                    reponse.write('<html> <body> Not Found </body></html>');
-                    response.end();
+            const mimeType = { 'Content-Type': 'text/plain' };
+            response.writeHead(status, mimeType);
+            response.write('<html> <body> Not Found </body></html>');
+            response.end();
 
         }
     });
 });
 
-server.listen(2000);
+server.listen(8000);
 console.log('servidor de paginas');
