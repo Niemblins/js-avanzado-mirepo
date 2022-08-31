@@ -1,0 +1,5 @@
+{
+    "presets":["@babel/preset-env"]
+}
+
+/*esto define como se va a utilizar babel, siempre se debe poner este codigo, se puede modificar, pero de ley se usa asi como esta*/
